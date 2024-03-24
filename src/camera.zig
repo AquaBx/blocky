@@ -92,11 +92,11 @@ pub const camera = struct {
         }
 
         // straf
-        if (window.getKey(glfw.Key.a) == glfw.Action.press) {
+        if (window.getKey(glfw.Key.d) == glfw.Action.press) {
             self.position.x -= @sin(self.theta) * dt * 15.0;
             self.position.z += @cos(self.theta) * dt * 15.0;
         }
-        if (window.getKey(glfw.Key.d) == glfw.Action.press) {
+        if (window.getKey(glfw.Key.a) == glfw.Action.press) {
             self.position.x += @sin(self.theta) * dt * 15.0;
             self.position.z -= @cos(self.theta) * dt * 15.0;
         }
@@ -123,7 +123,7 @@ pub const camera = struct {
             var anglex: f32 = @floatCast(rotX * dt / 10 * floatWidth);
             var angley: f32 = @floatCast(rotY * dt / 10 * floatHeight);
 
-            self.theta += anglex;
+            self.theta -= anglex;
             self.phi += angley;
 
             self.theta = @mod(self.theta, 2 * 3.14);
