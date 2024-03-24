@@ -5,6 +5,7 @@ const math = @import("zlm");
 const shader = @import("../shader.zig");
 const terrain = @import("./terrain.zig").Terrain;
 const gl = @import("gl");
+const Texture = @import("../texture.zig").Texture;
 
 const allocator = std.heap.page_allocator;
 
@@ -96,13 +97,13 @@ pub const Chunk = struct {
         allocator.free(indicebuffer);
     }
 
-    pub fn draw(self: Self, program: shader.program) void {
+    pub fn draw(self: Self, program: shader.program, texture: Texture) void {
         gl.bindVertexArray(self.vao);
 
         gl.uniform2f(gl.getUniformLocation(program.id, "chunkPos".ptr), @floatFromInt(self.x), @floatFromInt(self.y));
 
         gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, 1);
+        gl.bindTexture(gl.TEXTURE_2D, texture.id); // suppose le idText est pas bon
         gl.drawElements(gl.TRIANGLES, @intCast(self.ibosize), gl.UNSIGNED_INT, null);
     }
 

@@ -158,7 +158,7 @@ pub fn main() !void {
         cam.Matrix(75, 0.1, 1000.0, nterrain.program, "camMatrix");
         cam.Inputs(window, dt);
 
-        std.debug.print("\n{s}\n\n", .{"1"});
+        // std.debug.print("\n{s}\n\n", .{"1"});
 
         nterrain.draw(ntexture);
 
